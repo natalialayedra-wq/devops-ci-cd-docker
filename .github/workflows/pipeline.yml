@@ -1,24 +1,27 @@
 name: CI-CD Pipeline
 
 on:
-push:
+  push:
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-steps:
-- name: Clonar repositorio
-uses: actions/checkout@v3
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
 
-- name: Mostrar archivos
-run: ls -l
+      - name: Listar archivos
+        run: ls -l
 
-- name: Ejecutar script
-run: ./app.sh
+      - name: Dar permisos al script
+        run: chmod +x app.sh
 
-- name: Construir imagen Docker
-run: docker build -t devops-app .
+      - name: Ejecutar script
+        run: ./app.sh
 
-- name: Listar imagenes Docker
-run: docker images
+      - name: Construir imagen Docker
+        run: docker build -t devops-app .
+
+      - name: Listar imagenes Docker
+        run: docker images
